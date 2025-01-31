@@ -10,7 +10,5 @@ export const PostList: FC = () => {
         queryFn: requestPosts,
     })
 
-    console.log(data)
-
     return <section>{JSON.stringify(data)}</section>
 }

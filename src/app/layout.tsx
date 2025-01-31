@@ -26,6 +26,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                {/* 서버에서 QueryClient 를 생성 */}
                 <RootProvider>{children}</RootProvider>
             </body>
         </html>
