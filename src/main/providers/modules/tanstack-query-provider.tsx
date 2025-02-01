@@ -1,35 +1,8 @@
 'use client'
 
+import { getQueryClient } from '@/lib/tanstack-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import type { FC, PropsWithChildren } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const makeQueryProvider = () => {
-    return new QueryClient({
-        defaultOptions: {
-            queries: {
-                staleTime: 60 * 1000, // SSR에서는 클라이언트에서 즉시 refetch 하는 것을 피하기 위해 staleTime을 0보다 크게 설정하는 것이 좋다.
-            },
-        },
-    })
-}
-
-let browserQueryClient: QueryClient | undefined
-
-const getQueryClient = () => {
-    // server side일 경우
-    if (typeof window === 'undefined') {
-        return makeQueryProvider()
-    }
-
-    // client side 일 경우
-    else {
-        // browserQueryClient가 없을 경우에만 새로 만들어서 실행한다.
-        if (!browserQueryClient) {
-            browserQueryClient = makeQueryProvider()
-        }
-        return browserQueryClient
-    }
-}
 
 export const TanstackQueryProvider: FC<PropsWithChildren> = ({ children }) => {
     // QueryClient를 useState를 사용해 초기화하면 안된다.

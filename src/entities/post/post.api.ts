@@ -1,5 +1,5 @@
-import { requestHandler } from '@/lib/axios/request-handler'
+import { jphRequestHandler } from '@/lib/axios'
 
 export const requestPosts = () => {
-    return requestHandler<undefined, any>({ url: '/posts' })
+    return jphRequestHandler<undefined, any>({ url: '/posts' })
 }
