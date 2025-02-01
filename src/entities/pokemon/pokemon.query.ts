@@ -7,9 +7,9 @@ export const pokemonQueryKeys = createQueryKeys('pokemons', {
         queryKey: [pokemonId],
         queryFn: () => requestPokemon(pokemonId),
     }),
-    list: (pageParams: PaginationParams) => ({
+    list: (pageParams: PaginationParams = { page: 1, limit: 10 }) => ({
         queryKey: [{ pageParams }],
-        queryFn: (ctx) => requestPokemonList({ ...pageParams, page: ctx.pageParam as number }),
+        queryFn: () => requestPokemonList({ ...pageParams }),
         contextQueries: {
             page: (page: number) => ({
                 queryKey: [page],

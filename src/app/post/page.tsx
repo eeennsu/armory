@@ -1,5 +1,5 @@
 import { requestPosts } from '@/entities/post'
-import { PostList } from '@/features/post'
+import { PostListWidget } from '@/widgets/post'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import type { FC } from 'react'
 
@@ -27,7 +27,7 @@ const PostsPage: FC = () => {
             {/* HydrationBoundary는 하위에서 캐시된 데이터를 서버에서 사용할 수 있도록 해줌. 캐시된 데이터와 dehydrate된 데이터를 비교하여 가장 최신의 데이터를 유지. */}
             {/* 만약 state를 할당하지 않으면 캐시된 데이터를 그대로 사용함. */}
             <HydrationBoundary state={dehydratedState}>
-                <PostList />
+                <PostListWidget />
             </HydrationBoundary>
         </main>
     )
@@ -36,8 +36,12 @@ const PostsPage: FC = () => {
 export default PostsPage
 
 /*
-    dehydrate란? 서버에서 미리 데이터를 저장하는 기능 
-    hydrate란? 클라이언트에서 dehydrate된 데이터를 복원하는 기능
+    dehydrate란? 
+        - 서버에서 미리 데이터를 저장하는 기능 
+        - 클라이언트에 "전송" 할 수 있는 형태로 변환 (직렬화)
+    hydrate란? 
+        - 클라이언트에서 dehydrate된 데이터를 복원하는 기능
+        - 클라이언트에서 "사용" 할 수 있는 형태로 변환 (역직렬화)
 */
 
 /*
