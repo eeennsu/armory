@@ -22,6 +22,8 @@ const makeQueryProvider = () => {
             dehydrate: {
                 shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
             },
+
+            // 하지만, pending 상태를 dehydrate 하는 것이 과연 좋은걸까?
         },
     })
 }

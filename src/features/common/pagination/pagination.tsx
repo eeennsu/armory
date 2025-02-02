@@ -5,12 +5,12 @@ import type { FC } from 'react'
 type Props = {
     page: number
     total: number
-    perPage: number
     onPageChange: (page: number) => void
+    perPage?: number
     maxPagesToShow?: number
 }
 
-export const Pagination: FC<Props> = ({ page, total, perPage, onPageChange, maxPagesToShow = 5 }) => {
+export const Pagination: FC<Props> = ({ page, total, onPageChange, perPage = 10, maxPagesToShow = 5 }) => {
     const totalPages = Math.ceil(total / perPage)
     const hasPrevious = page > 1
     const hasNext = page < totalPages
@@ -18,7 +18,8 @@ export const Pagination: FC<Props> = ({ page, total, perPage, onPageChange, maxP
     const currentGroup = Math.ceil(page / maxPagesToShow)
     const startPage = (currentGroup - 1) * maxPagesToShow + 1
     const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages)
-    const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
+    const visiblePagesCount = endPage - startPage + 1
+    const pages = Array.from({ length: visiblePagesCount }, (_, i) => startPage + i)
 
     return (
         <div className='flex items-center gap-2'>
@@ -38,7 +39,7 @@ export const Pagination: FC<Props> = ({ page, total, perPage, onPageChange, maxP
                 ◀ Previous
             </button>
 
-            {(pages.at(0) || 0) > 1 && <span className='px-2'>...</span>}
+            {currentGroup >= 2 && <span className='px-2'>...</span>}
 
             {pages.map((p) => (
                 <button
@@ -50,8 +51,7 @@ export const Pagination: FC<Props> = ({ page, total, perPage, onPageChange, maxP
                 </button>
             ))}
 
-            {(pages.at(-1) || 0) < totalPages && <span className='px-2'>...</span>}
-
+            {currentGroup * maxPagesToShow < totalPages && <span className='px-2'>...</span>}
             <button
                 onClick={() => onPageChange(page + 1)}
                 disabled={!hasNext}

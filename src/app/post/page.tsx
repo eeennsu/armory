@@ -1,10 +1,11 @@
 import { requestPosts } from '@/entities/post'
+import { getQueryClient } from '@/lib/tanstack-query'
 import { PostListWidget } from '@/widgets/post'
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { FC } from 'react'
 
 const PostsPage: FC = () => {
-    const queryClient = new QueryClient()
+    const queryClient = getQueryClient()
 
     // 데이터를 비동기로 미리 가져옴. 이때 가져온 데이터는 QueryClient에 캐싱됨.
     // prefetchQuery를 통해 캐시된 데이터를 hydrationBoundary 내부에서 호출할 경우 별도의 api 호출 없이 캐시된 데이터를 서버에서 사용할 수 있게 된다.

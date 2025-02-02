@@ -1,7 +1,7 @@
 import { pokeRequestHandler } from '@/lib/axios'
 import { generateListPageParams, PaginationParams } from '../common'
 
-export const requestPokemonList = (paginationParams: PaginationParams) => {
+export const requestPokemonList = (paginationParams?: PaginationParams) => {
     const searchParams = generateListPageParams(paginationParams)
 
     return pokeRequestHandler<{}, any>({

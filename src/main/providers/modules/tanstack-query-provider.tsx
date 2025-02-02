@@ -2,6 +2,7 @@
 
 import { getQueryClient } from '@/lib/tanstack-query'
 import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { FC, PropsWithChildren } from 'react'
 
 export const TanstackQueryProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -10,7 +11,12 @@ export const TanstackQueryProvider: FC<PropsWithChildren> = ({ children }) => {
     // queryClient 자체를 폐기할 수 도 있다.
     const queryClient = getQueryClient()
 
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    return (
+        <QueryClientProvider client={queryClient}>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+    )
 }
 
 // 기존의 일반 CSR React에선 queryClient를 생성하고 이를 계속 사용해왔다.

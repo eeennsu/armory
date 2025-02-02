@@ -1,4 +1,6 @@
 import { mergeQueryKeys } from '@lukemorales/query-key-factory'
-import { pokemonQueryKeys } from '../pokemon'
+import { pokemonQueries } from '../pokemon'
 
-export const queries = mergeQueryKeys(pokemonQueryKeys)
+// 방법 2로 인한 업그레이드
+export const queries = mergeQueryKeys(pokemonQueries)
+

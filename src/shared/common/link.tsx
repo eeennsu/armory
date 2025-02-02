@@ -7,7 +7,7 @@ type Props = LinkProps & ComponentPropsWithoutRef<'a'>
 export const Link: FC<Props> = ({ className, ...props }) => {
     return (
         <NextLink
-            className={twMerge('text-2xl font-bold text-blue-500 hover:text-3xl', className)}
+            className={twMerge('text-2xl font-bold text-blue-500 hover:text-red-600', className)}
             {...props}
         />
     )
