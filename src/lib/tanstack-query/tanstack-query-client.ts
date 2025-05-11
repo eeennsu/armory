@@ -19,9 +19,9 @@ const makeQueryProvider = () => {
             // v 5.40 부터는 pending 상태의 쿼리도 직렬화하여 클라이언트에 전송할 수 있다.
             // 이렇게 하면 데이터 프리페칭을 최대한 빨리 시작하고, 데이터가 준비되는 대로 클라이언트에 스트리밍할 수 있다.
             // 예를 들어, 무한 스크롤에서 첫 페이지를 렌더링하면서 두번쨰 페이지를 미리 프리패칭할 수 있다.
-            dehydrate: {
-                shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
-            },
+            // dehydrate: {
+            //     shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
+            // },
 
             // 하지만, pending 상태를 dehydrate 하는 것이 과연 좋은걸까?
         },
