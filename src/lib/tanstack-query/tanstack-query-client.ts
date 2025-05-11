@@ -12,7 +12,7 @@ const makeQueryProvider = () => {
     return new QueryClient({
         defaultOptions: {
             queries: {
-                staleTime: 60 * 1000, // SSR에서는 클라이언트에서 즉시 refetch 하는 것을 피하기 위해 staleTime을 0보다 크게 설정하는 것이 좋다.
+                staleTime: 1000 * 60 * 3, // SSR에서는 클라이언트에서 즉시 refetch 하는 것을 피하기 위해 staleTime을 0보다 크게 설정하는 것이 좋다.
             },
 
             // 서버에서는 pending 상태의 쿼리를 기본적으로 dehydrate 하지 않음.

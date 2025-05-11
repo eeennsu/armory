@@ -4,18 +4,18 @@ import { PostListWidget } from '@/widgets/post'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import type { FC } from 'react'
 
-const PostsPage: FC = () => {
+const PostsPage: FC = async () => {
     const queryClient = getQueryClient()
 
     // 데이터를 비동기로 미리 가져옴. 이때 가져온 데이터는 QueryClient에 캐싱됨.
     // prefetchQuery를 통해 캐시된 데이터를 hydrationBoundary 내부에서 호출할 경우 별도의 api 호출 없이 캐시된 데이터를 서버에서 사용할 수 있게 된다.
     // QueryClient는 서버에서 생성되었기 때문에 불러온 데이터는 html 파일에 함께 포함되어 SSR 페이지가 생성된다.
-
-    queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
         // pending status 를 dehydrate 하지 않는 버전에선 async await를 사용해야하지만, 그게 아니면 그냥 사용해도 된다. Pending Query는 클라이언트로 전송되어 완료될 때 까지 알아서 대기한다.
         queryKey: ['posts'],
         queryFn: requestPosts,
     })
+
 
     // 캐싱된 QueryClient에서 mutations와 queries를 추출하는 과정
     // 기본적으로 성공한 쿼리만 포함한다. 만약 실패한 쿼리도 포함하려면 두번째 인자의 옵션에서 shouldDehydrateQuery를 () => true 로 설정

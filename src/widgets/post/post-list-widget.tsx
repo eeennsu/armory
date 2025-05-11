@@ -6,18 +6,30 @@ import type { FC } from 'react'
 
 export const PostListWidget: FC = () => {
     // pending status의 쿼리를 직렬화하지 않는다면, 상위 서버컴포넌트에서의 prefetchQuery 에서 async await를 사용해야한다.
-    // 하지만 그것이 아니면 useQuery가 아닌 useSuspenseQuery를 사용하지만, useQuery를 사용해도 된다.
+    // async await를 사욯하면 useQuery를 사용해도 된다. 하지만 async await를 쓰지 않는다면 useSuspenseQuery를 사용해도 된다.
     // const { data } = useQuery({
     //     queryKey: ['posts'],
     //     queryFn: requestPosts,
     // })
 
-    const { data } = useSuspenseQuery({
+    const { data } = useQuery({
         queryKey: ['posts'],
         queryFn: requestPosts,
     })
 
-    return <section>{JSON.stringify(data)}</section>
+    return (
+        <section>
+            {data?.map((item: any) => (
+                <article
+                    key={item.id}
+                    className='border-b p-2'
+                >
+                    <h2>{item.id}</h2>
+                    <p>{item.title}</p>
+                </article>
+            ))}
+        </section>
+    )
 }
 
 /* 
