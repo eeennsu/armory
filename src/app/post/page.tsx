@@ -16,7 +16,6 @@ const PostsPage: FC = async () => {
         queryFn: requestPosts,
     })
 
-
     // 캐싱된 QueryClient에서 mutations와 queries를 추출하는 과정
     // 기본적으로 성공한 쿼리만 포함한다. 만약 실패한 쿼리도 포함하려면 두번째 인자의 옵션에서 shouldDehydrateQuery를 () => true 로 설정
     // return 값은, 해당 queryClient의 쿼리 캐시 데이터를 포함한 객체임. 이 데이터를 클라이언트에서 hydrationBoundary로 전달하면, 캐시된 데이터를 사용할 수 있음

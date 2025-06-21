@@ -1,7 +1,7 @@
 'use client'
 
 import { requestPosts } from '@/entities/post'
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import type { FC } from 'react'
 
 export const PostListWidget: FC = () => {

@@ -1,13 +1,13 @@
 import { requestPokemon, requestPokemonList } from './pokemon.api'
 import { PaginationParams } from '../common'
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { generateQueryKeys } from '@/lib/tanstack-query/query-keys-factory'
+import { ENTITIES, generateQueryKeys } from '@/lib/tanstack-query/query-keys-factory'
 
 // 방법 1. Query Key 만을 추상화하여 업그레이드 시킨 방법
-export const pokemonQueryKeys = generateQueryKeys('pokemon')
+export const pokemonQueryKeys = generateQueryKeys(ENTITIES.POKEMON)
 
 // 방법 2. 공식문서의 Effective React Query Keys에서, query key만이 아닌 Query 자체를 하나로 추상화하여 업그레이드 시킨 방법
-export const pokemonQueries = createQueryKeys('pokemons', {
+export const pokemonQueries = createQueryKeys(ENTITIES.POKEMON, {
     detail: ({ pokemonId }: { pokemonId: string }) => ({
         queryKey: [pokemonId],
         queryFn: () => requestPokemon(pokemonId),
